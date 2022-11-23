@@ -1,0 +1,32 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build data pipeline:
+  stage: build
+  script:
+    - echo "Compiling the code..."
+    - echo "Compile complete."
+
+unit test data pipeline:
+  stage: test
+  script:
+    - echo "Running unit test... This step will take about 60 seconds."
+    - echo "Test complete."
+
+lint test code base:
+  stage: test
+  script:
+    - echo "Linting code... This step will take about 10 seconds."
+    - echo "Lint complete."
+
+deploy to production:
+  stage: deploy
+  when: manual
+  allow_failure: false
+  script:
+    - echo "Delpoying to production..."
+    - echo "Data pipeline successfully deployed."
+  only:
+    - main
