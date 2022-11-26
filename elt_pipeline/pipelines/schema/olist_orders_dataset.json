@@ -1,0 +1,15 @@
+{
+  "primary_keys": [
+    "order_id"
+  ],
+  "load_dtypes": {
+    "order_id": "str",
+    "customer_id": "str",
+    "order_status": "str",
+    "order_purchase_timestamp": "str",
+    "order_approved_at": "str",
+    "order_delivered_carrier_date": "str",
+    "order_delivered_customer_date": "str",
+    "order_estimated_delivery_date": "str"
+  }
+}

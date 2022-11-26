@@ -1,0 +1,60 @@
+run_coordinator:
+  module: dagster.core.run_coordinator
+  class: QueuedRunCoordinator
+  config:
+    max_concurrent_runs: 3
+
+scheduler:
+  module: dagster.core.scheduler
+  class: DagsterDaemonScheduler
+  config:
+    max_catchup_runs: 5
+
+run_storage:
+  module: dagster_postgres.run_storage
+  class: PostgresRunStorage
+  config:
+    postgres_db:
+      username:
+        env: DAGSTER_PG_USERNAME
+      password:
+        env: DAGSTER_PG_PASSWORD
+      hostname:
+        env: DAGSTER_PG_HOSTNAME
+      db_name:
+        env: DAGSTER_PG_DB
+      port: 5432
+
+run_launcher:
+  module: dagster.core.launcher
+  class: DefaultRunLauncher
+
+event_log_storage:
+  module: dagster_postgres.event_log
+  class: PostgresEventLogStorage
+  config:
+    postgres_db:
+      username:
+        env: DAGSTER_PG_USERNAME
+      password:
+        env: DAGSTER_PG_PASSWORD
+      hostname:
+        env: DAGSTER_PG_HOSTNAME
+      db_name:
+        env: DAGSTER_PG_DB
+      port: 5432
+
+schedule_storage:
+  module: dagster_postgres.schedule_storage
+  class: PostgresScheduleStorage
+  config:
+    postgres_db:
+      username:
+        env: DAGSTER_PG_USERNAME
+      password:
+        env: DAGSTER_PG_PASSWORD
+      hostname:
+        env: DAGSTER_PG_HOSTNAME
+      db_name:
+        env: DAGSTER_PG_DB
+      port: 5432

@@ -1,0 +1,144 @@
+[
+  [
+    "olist_orders_dataset",
+    {
+      "src_tbl": "olist_orders_dataset",
+      "ls_target": [
+        {
+          "target_tbl": "olist_orders_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "psql"
+        },
+        {
+          "target_tbl": "olist_orders_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "redshift"
+        }
+      ],
+      "schema": "olist_orders_dataset",
+      "strategy": "incremental_by_partition",
+      "partition": "order_purchase_timestamp"
+    }
+  ],
+  [
+    "product_category_name_translation",
+    {
+      "src_tbl": "product_category_name_translation",
+      "ls_target": [
+        {
+          "target_tbl": "product_category_name_translation",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "psql"
+        },
+        {
+          "target_tbl": "product_category_name_translation",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "redshift"
+        }
+      ],
+      "schema": "product_category_name_translation",
+      "strategy": "full_load"
+    }
+  ],
+  [
+    "olist_order_reviews_dataset",
+    {
+      "src_tbl": "olist_order_reviews_dataset",
+      "ls_target": [
+        {
+          "target_tbl": "olist_order_reviews_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "psql"
+        },
+        {
+          "target_tbl": "olist_order_reviews_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "redshift"
+        }
+      ],
+      "schema": "olist_order_reviews_dataset",
+      "strategy": "incremental_by_watermark",
+      "watermark": "review_creation_date"
+    }
+  ],
+  [
+    "olist_order_items_dataset",
+    {
+      "src_tbl": "olist_order_items_dataset",
+      "ls_target": [
+        {
+          "target_tbl": "olist_order_items_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "psql"
+        },
+        {
+          "target_tbl": "olist_order_items_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "redshift"
+        }
+      ],
+      "schema": "olist_order_items_dataset",
+      "strategy": "full_load"
+    }
+  ],
+  [
+    "olist_order_payments_dataset",
+    {
+      "src_tbl": "olist_order_payments_dataset",
+      "ls_target": [
+        {
+          "target_tbl": "olist_order_payments_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "psql"
+        },
+        {
+          "target_tbl": "olist_order_payments_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "redshift"
+        }
+      ],
+      "schema": "olist_order_payments_dataset",
+      "strategy": "full_load"
+    }
+  ],
+  [
+    "olist_customers_dataset",
+    {
+      "src_tbl": "olist_customers_dataset",
+      "ls_target": [
+        {
+          "target_tbl": "olist_customers_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "psql"
+        },
+        {
+          "target_tbl": "olist_customers_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "redshift"
+        }
+      ],
+      "schema": "olist_customers_dataset",
+      "strategy": "full_load"
+    }
+  ],
+  [
+    "olist_products_dataset",
+    {
+      "src_tbl": "olist_products_dataset",
+      "ls_target": [
+        {
+          "target_tbl": "olist_products_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "psql"
+        },
+        {
+          "target_tbl": "olist_products_dataset",
+          "target_schema": "brazillian_ecommerce",
+          "db_provider": "redshift"
+        }
+      ],
+      "schema": "olist_products_dataset",
+      "strategy": "full_load"
+    }
+  ]
+]

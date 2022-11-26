@@ -1,0 +1,17 @@
+{
+  "primary_keys": [
+    "order_id",
+    "order_item_id",
+    "product_id",
+    "seller_id"
+  ],
+  "load_dtypes": {
+    "order_id": "str",
+    "order_item_id": "int",
+    "product_id": "str",
+    "seller_id": "str",
+    "shipping_limit_date": "str",
+    "price": "float",
+    "freight_value": "float"
+  }
+}

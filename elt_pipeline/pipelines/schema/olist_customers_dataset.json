@@ -1,0 +1,12 @@
+{
+  "primary_keys": [
+    "customer_id"
+  ],
+  "load_dtypes": {
+    "customer_id": "str",
+    "customer_unique_id": "str",
+    "customer_zip_code_prefix": "int",
+    "customer_city": "str",
+    "customer_state": "str"
+  }
+}
