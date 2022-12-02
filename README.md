@@ -17,6 +17,8 @@ Mục tiêu của project này là xây dựng một data pipeline để đưa d
 
 ![](https://i.imgur.com/Hj9mnFH.png)
 
+Chi tiết hơn xem ở: [Exploratory Data Analysis](./EDA.ipynb)
+
 ## 3\. Design
 
 Chúng ta sử dụng [dagster](https://dagster.io/) để orchestrate tasks.
