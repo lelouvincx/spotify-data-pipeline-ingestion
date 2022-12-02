@@ -1,5 +1,7 @@
 venv/
 storage/
 .terraform
+.env
 env
 env.test
+.cache*
