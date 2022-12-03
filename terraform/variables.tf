@@ -9,20 +9,19 @@ variable "aws_region" {
 variable "key_name" {
   description = "EC2 key name"
   type        = string
-  default     = "sde-key-prod"
+  default     = "project-spotify-key"
 }
 
 ## EC2 instance type
-## https://www.amazonaws.cn/en/ec2/instance-types/
 variable "instance_type" {
   description = "Instance type for EC2"
   type        = string
-  default     = "t2.small"
+  default     = "t2.micro"
 }
 
 ## S3
 variable "bucket_name" {
-  default = "datalake-de-course-prod"
+  default = "project-spotify-datalake"
 }
 
 variable "acl_value" {

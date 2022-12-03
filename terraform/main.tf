@@ -5,14 +5,16 @@ terraform {
       version = "~> 4.16"
     }
   }
+
+  required_version = ">= 1.2.0"
 }
 
 provider "aws" {
   region = var.aws_region
 }
 
-resource "aws_security_group" "sde_security_group_prod" {
-  name        = "sde_security_group_prod"
+resource "aws_security_group" "project_spotify_security_group" {
+  name        = "project_spotify_security_group"
   description = "Security group to allow inbound SCP & outbound 8080 (Airflow) connections"
 
   ingress {
@@ -38,7 +40,7 @@ resource "aws_security_group" "sde_security_group_prod" {
   }
 
   tags = {
-    Name = "sde_security_group_prod"
+    Name = "project_spotify_security_group"
   }
 }
 
@@ -69,11 +71,11 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "sde_ec2" {
+resource "aws_instance" "project_spotify_ec2" {
   ami = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   key_name = aws_key_pair.generated_key.key_name
-  security_groups = [aws_security_group.sde_security_group_prod.name]
+  security_groups = [aws_security_group.project_spotify_security_group.name]
 
   root_block_device {
     volume_size = 30
@@ -81,7 +83,7 @@ resource "aws_instance" "sde_ec2" {
   }
 
   tags = {
-    Name = "ec2-de-course-prod"
+    Name = "project-spotify-ec2"
   }
 
   user_data = "${file("init.sh")}"

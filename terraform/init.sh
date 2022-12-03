@@ -13,6 +13,5 @@ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev
 sudo apt-get -y update
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo chmod 666 /var/run/docker.sock
-sudo apt install make docker-compose zsh -y
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo apt install make docker-compose neovim -y
 echo "-------------------------END SETUP---------------------------"

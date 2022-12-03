@@ -5,7 +5,7 @@ output "aws_region" {
 
 output "ec2_public_dns" {
   description = "EC2 public dns"
-  value = aws_instance.sde_ec2.public_dns
+  value = aws_instance.project_spotify_ec2.public_dns
 }
 
 output "private_key" {
@@ -15,6 +15,6 @@ output "private_key" {
 }
 
 output "public_key" {
-  description = "EC2 public key."
+  description = "EC2 public key"
   value       = tls_private_key.custom_key.public_key_openssh
 }
