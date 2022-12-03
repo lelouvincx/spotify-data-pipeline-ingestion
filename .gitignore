@@ -1,7 +1,13 @@
 venv/
 storage/
-.terraform
 .env
 env
 env.test
 .cache*
+__pycache__/
+docker-compose-test.yml
+.coverage
+.terraform
+terraform.tfstate
+.terraform.lock.hcl
+private_key.pem
