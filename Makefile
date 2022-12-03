@@ -18,8 +18,20 @@ down:
 down-test:
 	docker-compose -f docker-compose-test.yml --env-file env.test down	
 
+restart:
+	docker-compose --env-file env down && docker-compose --env-file env up -d
+
 to_mysql:
 	docker exec -it de_mysql mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" ${MYSQL_DATABASE}
+
+mysql_create:
+	docker exec -it de_mysql mysql --local_infile -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" ${MYSQL_DATABASE} -e"source /tmp/mysql_datasource.sql"
+
+mysql_load:
+	docker exec -it de_mysql mysql --local_infile -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" ${MYSQL_DATABASE} -e"source /tmp/mysql_load_csv.sql"
+
+mysql_set_foreign_key:
+	docker exec -it de_mysql mysql --local_infile -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" ${MYSQL_DATABASE} -e"source /tmp/mysql_set_foreign_key.sql"
 
 to_psql:
 	docker exec -ti de_psql psql postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
