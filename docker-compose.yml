@@ -6,6 +6,10 @@ services:
     container_name: de_mysql
     volumes:
       - ./storage/mysql-data:/var/lib/mysql
+      - ../spotify_data/dataset:/tmp/dataset
+      - ./load_dataset/mysql_datasource.sql:/tmp/mysql_datasource.sql
+      - ./load_dataset/mysql_load_csv.sql:/tmp/mysql_load_csv.sql
+      - ./load_dataset/mysql_set_foreign_key.sql:/tmp/mysql_set_foreign_key.sql
     ports:
       - "3306:3306"
     env_file:
@@ -13,73 +17,73 @@ services:
     networks:
       - de_network
 
-  de_psql:
-    image: postgres:15
-    container_name: de_psql
-    volumes:
-      - ./storage/postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    env_file:
-      - env
-    networks:
-      - de_network
-
-  elt_pipeline:
-    build:
-      context: ./elt_pipeline
-      dockerfile: ./Dockerfile
-    container_name: elt_pipeline
-    image: elt_pipeline:latest
-    volumes:
-      - ./elt_pipeline:/opt/dagster/app
-    env_file:
-      - env
-    networks:
-      - de_network
-
-  de_dagster:
-    build:
-      context: ./dockers/dagster/
-    container_name: de_dagster
-    image: de_dagster
-
-  de_dagster_dagit:
-    image: de_dagster:latest
-    entrypoint:
-      - dagit
-      - -h
-      - "0.0.0.0"
-      - -p
-      - "3001"
-      - -w
-      - workspace.yaml
-    container_name: de_dagster_dagit
-    expose:
-      - "3001"
-    ports:
-      - "3001:3001"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./dagster_home:/opt/dagster/dagster_home
-    env_file:
-      - env
-    networks:
-      - de_network
-
-  de_dagster_daemon:
-    image: de_dagster:latest
-    entrypoint:
-      - dagster-daemon
-      - run
-    container_name: de_dagster_daemon
-    volumes: # Make docker client accessible so we can launch containers using host docker
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./dagster_home:/opt/dagster/dagster_home
-    env_file:
-      - env
-    networks:
-      - de_network
+  # de_psql:
+  #   image: postgres:15
+  #   container_name: de_psql
+  #   volumes:
+  #     - ./storage/postgres-data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   env_file:
+  #     - env
+  #   networks:
+  #     - de_network
+  #
+  # elt_pipeline:
+  #   build:
+  #     context: ./elt_pipeline
+  #     dockerfile: ./Dockerfile
+  #   container_name: elt_pipeline
+  #   image: elt_pipeline:latest
+  #   volumes:
+  #     - ./elt_pipeline:/opt/dagster/app
+  #   env_file:
+  #     - env
+  #   networks:
+  #     - de_network
+  #
+  # de_dagster:
+  #   build:
+  #     context: ./dockers/dagster/
+  #   container_name: de_dagster
+  #   image: de_dagster
+  #
+  # de_dagster_dagit:
+  #   image: de_dagster:latest
+  #   entrypoint:
+  #     - dagit
+  #     - -h
+  #     - "0.0.0.0"
+  #     - -p
+  #     - "3001"
+  #     - -w
+  #     - workspace.yaml
+  #   container_name: de_dagster_dagit
+  #   expose:
+  #     - "3001"
+  #   ports:
+  #     - "3001:3001"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - ./dagster_home:/opt/dagster/dagster_home
+  #   env_file:
+  #     - env
+  #   networks:
+  #     - de_network
+  #
+  # de_dagster_daemon:
+  #   image: de_dagster:latest
+  #   entrypoint:
+  #     - dagster-daemon
+  #     - run
+  #   container_name: de_dagster_daemon
+  #   volumes: # Make docker client accessible so we can launch containers using host docker
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - ./dagster_home:/opt/dagster/dagster_home
+  #   env_file:
+  #     - env
+  #   networks:
+  #     - de_network
 
 networks:
   de_network:
