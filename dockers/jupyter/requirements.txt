@@ -1,0 +1,11 @@
+pandas==1.4.1
+requests==2.27.1
+ipython_genutils==0.1.0
+PyMySQL==1.0.2
+wordcloud==1.8.2.2
+pandas-profiling==3.3.0
+dagster==1.0.16
+dagit==1.0.16
+ipykernel==6.19.2
+matplotlib==3.6.2
+seaborn==0.12.1
