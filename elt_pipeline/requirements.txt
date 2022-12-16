@@ -20,4 +20,6 @@ boto3==1.24.73
 fsspec==2022.8.2
 s3fs==0.4.2
 cryptography==38.0.3
+spotipy==2.22.0
+path==16.6.0
 pyarrow==10.0.0

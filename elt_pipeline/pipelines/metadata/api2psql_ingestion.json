@@ -1,0 +1,38 @@
+[
+  [
+    "my_tracks",
+    {
+      "src_tbl": "my_tracks",
+      "ls_target": {
+        "target_tbl": "my_tracks",
+        "target_schema": "spotify",
+        "db_provider": "psql"
+      },
+      "schema": "my_tracks",
+      "strategy": "incremental_by_watermark",
+      "watermark": "review_creation_date",
+      "load_dtypes": {
+        "album_id": "str",
+        "artists_id": "str",
+        "track_id": "str",
+        "track_unique_id": "str",
+        "name": "str",
+        "popularity": "int",
+        "type": "str",
+        "duration_ms": "int",
+        "played_at": "str",
+        "danceability": "float",
+        "energy": "float",
+        "track_key": "int",
+        "loudness": "float",
+        "mode": "int",
+        "speechiness": "float",
+        "acousticness": "float",
+        "instrumentalness": "float",
+        "liveness": "float",
+        "valence": "float",
+        "tempo": "float"
+      }
+    }
+  ]
+]

@@ -1,0 +1,25 @@
+{
+  "primary_keys": ["track_unique_id"],
+  "load_dtypes": {
+    "album_id": "str",
+    "artists_id": "str",
+    "track_id": "str",
+    "track_unique_id": "str",
+    "name": "str",
+    "popularity": "int",
+    "type": "str",
+    "duration_ms": "int",
+    "played_at": "str",
+    "danceability": "float",
+    "energy": "float",
+    "track_key": "int",
+    "loudness": "float",
+    "mode": "int",
+    "speechiness": "float",
+    "acousticness": "float",
+    "instrumentalness": "float",
+    "liveness": "float",
+    "valence": "float",
+    "tempo": "float"
+  }
+}

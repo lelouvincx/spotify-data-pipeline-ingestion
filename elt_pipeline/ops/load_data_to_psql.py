@@ -8,14 +8,14 @@ def load_data_to_psql(context, upstream):
     if upstream is None:
         return None
 
-    # load data to target
-    context.log.info("Load data to PSQL")
+    # Load data to target
+    context.log.info("Loading data to postgreSQL")
     context.log.info(f"Extracting data from {upstream.get('s3_file')}")
-    # pd_stag = pd.read_parquet(upstream.get('s3_file'))
-    pd_stag = pd.read_csv(upstream.get('s3_file'), sep="|", compression="gzip", dtype=upstream.get('load_dtypes'))
+    pd_stag = pd.read_parquet(upstream.get("s3_file"))
     context.log.info(f"Extracted data shape: {pd_stag.shape}")
 
     if len(pd_stag) == 0:
+        context.log.info("No data to upload!")
         return "No data to upload!"
 
     # Execute

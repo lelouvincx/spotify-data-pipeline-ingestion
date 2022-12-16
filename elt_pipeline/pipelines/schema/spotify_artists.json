@@ -1,0 +1,14 @@
+{
+  "primary_keys": ["artist_id", "track_id"],
+  "load_dtypes": {
+    "number": "int",
+    "artist_popularity": "int",
+    "followers": "int",
+    "genres": "list",
+    "artist_id": "str",
+    "name": "str",
+    "track_id": "str",
+    "track_name_prev": "str",
+    "type": "str"
+  }
+}

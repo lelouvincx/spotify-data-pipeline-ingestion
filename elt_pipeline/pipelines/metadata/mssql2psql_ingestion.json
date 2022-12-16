@@ -1,144 +1,103 @@
 [
   [
-    "olist_orders_dataset",
+    "spotify_albums",
     {
-      "src_tbl": "olist_orders_dataset",
-      "ls_target": [
-        {
-          "target_tbl": "olist_orders_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "psql"
-        },
-        {
-          "target_tbl": "olist_orders_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "redshift"
-        }
-      ],
-      "schema": "olist_orders_dataset",
-      "strategy": "incremental_by_partition",
-      "partition": "order_purchase_timestamp"
+      "src_tbl": "spotify_albums",
+      "ls_target": {
+        "target_tbl": "spotify_albums",
+        "target_schema": "spotify",
+        "db_provider": "psql"
+      },
+      "schema": "spotify_albums",
+      "strategy": "full_load",
+      "load_dtypes": {
+        "number": "int",
+        "album_type": "str",
+        "artist_id": "str",
+        "available_markets": "str",
+        "external_urls": "str",
+        "href": "str",
+        "album_id": "str",
+        "images": "str",
+        "name": "str",
+        "release_date": "str",
+        "release_date_precision": "str",
+        "total_tracks": "int",
+        "track_id": "str",
+        "track_name_prev": "str",
+        "uri": "str",
+        "type": "str"
+      }
     }
   ],
   [
-    "product_category_name_translation",
+    "spotify_artists",
     {
-      "src_tbl": "product_category_name_translation",
-      "ls_target": [
-        {
-          "target_tbl": "product_category_name_translation",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "psql"
-        },
-        {
-          "target_tbl": "product_category_name_translation",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "redshift"
-        }
-      ],
-      "schema": "product_category_name_translation",
-      "strategy": "full_load"
+      "src_tbl": "spotify_artists",
+      "ls_target": {
+        "target_tbl": "spotify_artists",
+        "target_schema": "spotify",
+        "db_provider": "psql"
+      },
+      "schema": "spotify_artists",
+      "strategy": "full_load",
+      "load_dtypes": {
+        "number": "int",
+        "artist_popularity": "int",
+        "followers": "int",
+        "genres": "str",
+        "artist_id": "str",
+        "name": "str",
+        "track_id": "str",
+        "track_name_prev": "str",
+        "type": "str"
+      }
     }
   ],
   [
-    "olist_order_reviews_dataset",
+    "spotify_tracks",
     {
-      "src_tbl": "olist_order_reviews_dataset",
-      "ls_target": [
-        {
-          "target_tbl": "olist_order_reviews_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "psql"
-        },
-        {
-          "target_tbl": "olist_order_reviews_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "redshift"
-        }
-      ],
-      "schema": "olist_order_reviews_dataset",
-      "strategy": "incremental_by_watermark",
-      "watermark": "review_creation_date"
-    }
-  ],
-  [
-    "olist_order_items_dataset",
-    {
-      "src_tbl": "olist_order_items_dataset",
-      "ls_target": [
-        {
-          "target_tbl": "olist_order_items_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "psql"
-        },
-        {
-          "target_tbl": "olist_order_items_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "redshift"
-        }
-      ],
-      "schema": "olist_order_items_dataset",
-      "strategy": "full_load"
-    }
-  ],
-  [
-    "olist_order_payments_dataset",
-    {
-      "src_tbl": "olist_order_payments_dataset",
-      "ls_target": [
-        {
-          "target_tbl": "olist_order_payments_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "psql"
-        },
-        {
-          "target_tbl": "olist_order_payments_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "redshift"
-        }
-      ],
-      "schema": "olist_order_payments_dataset",
-      "strategy": "full_load"
-    }
-  ],
-  [
-    "olist_customers_dataset",
-    {
-      "src_tbl": "olist_customers_dataset",
-      "ls_target": [
-        {
-          "target_tbl": "olist_customers_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "psql"
-        },
-        {
-          "target_tbl": "olist_customers_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "redshift"
-        }
-      ],
-      "schema": "olist_customers_dataset",
-      "strategy": "full_load"
-    }
-  ],
-  [
-    "olist_products_dataset",
-    {
-      "src_tbl": "olist_products_dataset",
-      "ls_target": [
-        {
-          "target_tbl": "olist_products_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "psql"
-        },
-        {
-          "target_tbl": "olist_products_dataset",
-          "target_schema": "brazillian_ecommerce",
-          "db_provider": "redshift"
-        }
-      ],
-      "schema": "olist_products_dataset",
-      "strategy": "full_load"
+      "src_tbl": "spotify_tracks",
+      "ls_target": {
+        "target_tbl": "spotify_tracks",
+        "target_schema": "spotify",
+        "db_provider": "psql"
+      },
+      "schema": "spotify_tracks",
+      "strategy": "full_load",
+      "load_dtypes": {
+        "number0": "int",
+        "number": "int",
+        "acousticness": "float",
+        "album_id": "str",
+        "analysis_url": "str",
+        "artists_id": "str",
+        "country": "str",
+        "danceability": "float",
+        "disc_number": "int",
+        "duration_ms": "int",
+        "energy": "float",
+        "href": "str",
+        "track_id": "str",
+        "instrumentalness": "float",
+        "track_key": "int",
+        "liveness": "float",
+        "loudness": "float",
+        "mode": "int",
+        "name": "str",
+        "playlist": "str",
+        "popularity": "int",
+        "preview_url": "str",
+        "speechiness": "float",
+        "tempo": "float",
+        "time_signature": "int",
+        "track_href": "str",
+        "track_name_prev": "str",
+        "track_number": "int",
+        "uri": "str",
+        "valence": "float",
+        "type": "str"
+      }
     }
   ]
 ]
