@@ -76,6 +76,7 @@ CREATE TABLE spotify.my_tracks (
   album_id VARCHAR(50),
   artists_id VARCHAR(128),
   track_id VARCHAR(50),
+  track_unique_id VARCHAR(64),
   name VARCHAR(128),
   popularity INT,
   type VARCHAR(10),
@@ -92,5 +93,5 @@ CREATE TABLE spotify.my_tracks (
   liveness DOUBLE PRECISION,
   valence DOUBLE PRECISION,
   tempo DOUBLE PRECISION,
-  PRIMARY KEY (track_id)
+  PRIMARY KEY (track_unique_id)
 );
