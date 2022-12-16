@@ -11,3 +11,8 @@ docker-compose-test.yml
 terraform.tfstate
 .terraform.lock.hcl
 private_key.pem
+Pipfile
+Pipfile.lock
+dagster_home/logs/
+dagster_home/.logs_queue/
+dagster_home/.telemetry/
