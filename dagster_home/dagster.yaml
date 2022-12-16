@@ -2,13 +2,13 @@ run_coordinator:
   module: dagster.core.run_coordinator
   class: QueuedRunCoordinator
   config:
-    max_concurrent_runs: 3
+    max_concurrent_runs: 2
 
 scheduler:
   module: dagster.core.scheduler
   class: DagsterDaemonScheduler
   config:
-    max_catchup_runs: 5
+    max_catchup_runs: 3
 
 run_storage:
   module: dagster_postgres.run_storage
