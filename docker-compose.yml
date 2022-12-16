@@ -29,15 +29,35 @@ services:
     networks:
       - de_network
 
+  de_metabase:
+    image: metabase/metabase:v0.45.0
+    container_name: de_metabase
+    ports:
+      - "3000:3000"
+    env_file:
+      - env
+    networks:
+      - de_network
+
   elt_pipeline:
     build:
       context: ./elt_pipeline
     image: elt_pipeline:latest
     container_name: elt_pipeline
-    expose:
-      - "4000"
     volumes:
       - ./elt_pipeline:/opt/dagster/app
+    env_file:
+      - env
+    networks:
+      - de_network
+
+  dbt_analytics:
+    build:
+      context: ./dbt_analytics
+    image: dbt_analytics
+    container_name: dbt_analytics
+    volumes:
+      - ./dbt_analytics:/opt/dagster/app
     env_file:
       - env
     networks:
