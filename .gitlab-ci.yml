@@ -8,11 +8,9 @@ build data pipeline:
   script:
     - echo "Building data pipeline..."
     - echo "Compiling the code..."
-    - echo $IMAGE_NAME
     - touch ./env && cat $ENV > ./env
     - cat ./env
     - echo
-    - chmod 600 $PEM_FILE
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
@@ -25,7 +23,10 @@ unit test data pipeline:
   stage: test
   script:
     - echo "Running unit test... This step will take about 60 seconds."
-    - echo $IMAGE_NAME
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
     - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && make up && make test && make down"
     - echo "Test complete."
 
@@ -33,7 +34,10 @@ lint test code base:
   stage: test
   script:
     - echo "Linting code... This step will take about 10 seconds."
-    - echo $IMAGE_NAME
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
     - ssh -o StrictHostKeyChecking=no $SERVER "make install"
     - ssh -o StrictHostKeyChecking=no $SERVER ". venv/bin/activate && make check && make lint"
     - echo "Lint complete."
@@ -44,7 +48,10 @@ deploy to production:
   allow_failure: false
   script:
     - echo "Delpoying to production..."
-    - echo $IMAGE_NAME
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
     - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && make restart"
     - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 3306" # health check MySQL
     - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 5432" # health check PostgreSQL
