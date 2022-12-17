@@ -6,19 +6,30 @@ stages:
 build data pipeline:
   stage: build
   script:
+    - echo "Building data pipeline..."
     - echo "Compiling the code..."
+    - echo $IMAGE_NAME
+    - touch ./env && cat $ENV > ./env
+    -
+    - scp -i ./key.pem -o StrictHostKeyChecking=no ./env $SERVER:$DIR #Overwrite env file
+    - $SSH_SERVER "cd $DIR && git checkout main && git pull && make build"
     - echo "Compile complete."
 
 unit test data pipeline:
   stage: test
   script:
     - echo "Running unit test... This step will take about 60 seconds."
+    - echo $IMAGE_NAME
+    - $SSH_SERVER "cd $DIR && make up && make test && make down"
     - echo "Test complete."
 
 lint test code base:
   stage: test
   script:
     - echo "Linting code... This step will take about 10 seconds."
+    - echo $IMAGE_NAME
+    - make install
+    - . venv/bin/activate && make check && make lint
     - echo "Lint complete."
 
 deploy to production:
@@ -27,6 +38,12 @@ deploy to production:
   allow_failure: false
   script:
     - echo "Delpoying to production..."
+    - echo $IMAGE_NAME
+    - $SSH_SERVER "cd $DIR && make restart"
+    - $SSH_SERVER "cd $DIR && nc -zv localhost 3306" # health check MySQL
+    - $SSH_SERVER "cd $DIR && nc -zv localhost 5432" # health check PostgreSQL
+    - $SSH_SERVER "cd $DIR && nc -zv localhost 3001" # health check dagit
+    - $SSH_SERVER "cd $DIR && nc -zv localhost 3000" # health check metabase
     - echo "Data pipeline successfully deployed."
   only:
     - main
