@@ -24,6 +24,7 @@ services:
       - "5432:5432"
     volumes:
       - ./storage/postgres-data:/var/lib/postgresql/data
+      - ./load_dataset/psql_datasource.sql:/tmp/psql_datasource.sql
     env_file:
       - env
     networks:
@@ -34,6 +35,8 @@ services:
     container_name: de_metabase
     ports:
       - "3000:3000"
+    volumes:
+      - ./metabase-data:/metabase-data
     env_file:
       - env
     networks:
