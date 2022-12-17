@@ -17,7 +17,6 @@ build data pipeline:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    # - $SSH_SERVER "cd $DIR && git checkout main && git pull && make build"
     - scp -o StrictHostKeyChecking=no ./env $SERVER:$DIR #Overwrite env file
     - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && git checkout main && git pull && make build"
     - echo "Compile complete."
@@ -27,7 +26,7 @@ unit test data pipeline:
   script:
     - echo "Running unit test... This step will take about 60 seconds."
     - echo $IMAGE_NAME
-    - $SSH_SERVER "cd $DIR && make up && make test && make down"
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && make up && make test && make down"
     - echo "Test complete."
 
 lint test code base:
@@ -35,8 +34,8 @@ lint test code base:
   script:
     - echo "Linting code... This step will take about 10 seconds."
     - echo $IMAGE_NAME
-    - make install
-    - . venv/bin/activate && make check && make lint
+    - ssh -o StrictHostKeyChecking=no $SERVER "make install"
+    - ssh -o StrictHostKeyChecking=no $SERVER ". venv/bin/activate && make check && make lint"
     - echo "Lint complete."
 
 deploy to production:
@@ -46,11 +45,11 @@ deploy to production:
   script:
     - echo "Delpoying to production..."
     - echo $IMAGE_NAME
-    - $SSH_SERVER "cd $DIR && make restart"
-    - $SSH_SERVER "cd $DIR && nc -zv localhost 3306" # health check MySQL
-    - $SSH_SERVER "cd $DIR && nc -zv localhost 5432" # health check PostgreSQL
-    - $SSH_SERVER "cd $DIR && nc -zv localhost 3001" # health check dagit
-    - $SSH_SERVER "cd $DIR && nc -zv localhost 3000" # health check metabase
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && make restart"
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 3306" # health check MySQL
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 5432" # health check PostgreSQL
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 3001" # health check dagit
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 3000" # health check metabase
     - echo "Data pipeline successfully deployed."
   only:
     - main
