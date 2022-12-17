@@ -3,20 +3,11 @@ include env
 build:
 	docker-compose build
 
-build-test:
-	docker-compose -f docker-compose-test.yml build	
-
 up:
 	docker-compose --env-file env up -d
 
-up-test:
-	docker-compose -f docker-compose-test.yml --env-file env.test up -d	
-
 down:
 	docker-compose --env-file env down
-
-down-test:
-	docker-compose -f docker-compose-test.yml --env-file env.test down	
 
 restart:
 	docker-compose --env-file env down && docker-compose --env-file env up -d
@@ -34,10 +25,16 @@ mysql_set_foreign_key:
 	docker exec -it de_mysql mysql --local_infile -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" ${MYSQL_DATABASE} -e"source /tmp/mysql_set_foreign_key.sql"
 
 to_psql:
-	docker exec -ti de_psql psql postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+	docker exec -it de_psql psql postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
 
-to_psql_test:
-	docker exec -ti de_psql psql postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/brazillian_ecommerce_test	
+to_psql_no_db:
+	docker exec -it de_psql psql postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/postgres
+
+psql_create:
+	docker exec -it de_psql psql postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/spotify -f /tmp/psql_datasource.sql -a
+
+dbt_install_deps:
+	docker exec -it dbt_analytics cd /opt/dagster/app/spotify && dbt deps
 
 check:
 	black ./elt_pipeline --check
@@ -45,9 +42,9 @@ check:
 lint:
 	flake8 ./elt_pipeline
 
-test-docker:
-	docker exec elt_pipeline_test python -m pytest -vv --cov=utils tests/utils \
-	&& docker exec elt_pipeline_test python -m pytest -vv --cov=ops tests/ops
+test:
+	docker exec elt_pipeline python -m pytest -vv --cov=utils tests/utils \
+	&& docker exec elt_pipeline python -m pytest -vv --cov=ops tests/ops
 	
 install:
 	python3 -V \
