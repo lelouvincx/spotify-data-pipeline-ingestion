@@ -1,7 +1,7 @@
 import json
 import os
 from datetime import datetime
-from dagster import hourly_partitioned_config, op, job, daily_partitioned_config
+from dagster import op, job, daily_partitioned_config
 
 from ops.extract_data_from_api import factory_for_extract_data_from_api
 from ops.load_data_to_psql import factory_for_load_data_to_psql
