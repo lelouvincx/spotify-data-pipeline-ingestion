@@ -14,7 +14,7 @@ build data pipeline:
     - echo
     - chmod 600 $PEM_FILE
     - eval $(ssh-agent -s)
-    - echo $PEM_FILE | tr -d '\r' | ssh-add -
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     # - $SSH_SERVER "cd $DIR && git checkout main && git pull && make build"
