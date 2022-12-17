@@ -13,8 +13,13 @@ build data pipeline:
     - cat ./env
     - echo
     - chmod 600 $PEM_FILE
-    - scp -i $PEM_FILE -o StrictHostKeyChecking=no ./env $SERVER:$DIR #Overwrite env file
-    - $SSH_SERVER "cd $DIR && git checkout main && git pull && make build"
+    - eval $(ssh-agent -s)
+    - echo $PEM_FILE | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    # - $SSH_SERVER "cd $DIR && git checkout main && git pull && make build"
+    - scp -o StrictHostKeyChecking=no ./env $SERVER:$DIR #Overwrite env file
+    - ssh -o StrictHostKeyChecking=no $SERVER:$DIR "cd $DIR && git checkout main && git pull && make build"
     - echo "Compile complete."
 
 unit test data pipeline:
