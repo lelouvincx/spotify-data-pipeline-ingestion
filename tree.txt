@@ -1,0 +1,38 @@
+├── docker-compose.yml
+├── EDA.ipynb
+├── env
+├── .gitignore
+├── .gitlab-ci.yml
+├── Makefile
+├── README.md
+├── requirements.txt
+├── elt_pipeline
+├── cicd
+│   ├── mysql_all.sql
+│   ├── psql_all.sql
+│   └── redshift_all.sql
+├── dagster_home
+│   ├── dagster.yaml
+│   └── workspace.yaml
+├── dataset
+│   ├── spotify_albums.csv
+│   ├── spotify_artists.csv
+│   └── spotify_tracks.csv
+├── dockers
+│   ├── dagster
+│   │   ├── Dockerfile
+│   │   └── requirements.txt
+│   └── jupyter
+│       ├── Dockerfile
+│       └── requirements.txt
+├── load_dataset
+│   ├── mysql_datasource.sql
+│   ├── mysql_load_csv.sql
+│   └── mysql_set_foreign_key.sql
+└── terraform
+    ├── init.sh
+    ├── main.tf
+    ├── Makefile
+    ├── output.tf
+    ├── storage.tf
+    ├── variables.tf
