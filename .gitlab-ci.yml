@@ -10,6 +10,7 @@ build data pipeline:
     - echo "Compiling the code..."
     - echo $IMAGE_NAME
     - touch ./env && cat $ENV > ./env
+    - cat ./env
     - scp -i ./key.pem -o StrictHostKeyChecking=no ./env $SERVER:$DIR #Overwrite env file
     - $SSH_SERVER "cd $DIR && git checkout main && git pull && make build"
     - echo "Compile complete."
