@@ -9,6 +9,7 @@ docker-compose-test.yml
 .coverage
 .terraform
 terraform.tfstate
+terraform.tfstate.backup
 .terraform.lock.hcl
 private_key.pem
 Pipfile
