@@ -1,0 +1,20 @@
+version: 2
+models:
+  - name: cleaned_spotify_albums
+    columns:
+      - name: album_id
+        tests:
+          - unique
+          - not_null
+  - name: cleaned_spotify_artists
+    columns:
+      - name: artist_id
+        tests:
+          - unique
+          - not_null
+  - name: cleaned_spotify_tracks
+    columns:
+      - name: track_id
+        tests:
+          - unique
+          - not_null

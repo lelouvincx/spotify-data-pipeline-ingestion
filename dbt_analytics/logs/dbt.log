@@ -1,0 +1,26 @@
+
+
+============================== 2022-12-16 12:42:56.999885 | 59b1f8f9-8c63-40c4-b638-bc172317e6b0 ==============================
+[0m12:42:56.999896 [info ] [MainThread]: Running with dbt=1.2.1
+[0m12:42:57.000256 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': '/home/lelouvincx/Documents/FundamentalDataEngineering/project/dbt_analytics', 'send_anonymous_usage_stats': True, 'event_buffer_size': 100000, 'quiet': False, 'no_print': False, 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
+[0m12:42:57.000407 [debug] [MainThread]: Tracking: tracking
+[0m12:42:57.001552 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9b44aa320>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9b44aa800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9b44a97e0>]}
+[0m12:42:58.607327 [debug] [MainThread]: Starter project path: /home/lelouvincx/.local/share/virtualenvs/project-9YuVnP_a/lib/python3.10/site-packages/dbt/include/starter_project
+[0m12:43:03.434395 [info ] [MainThread]: 
+Your new dbt project "spotify" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m12:43:03.434835 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9b44a8460>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9b44a84c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9b44a8a30>]}
+[0m12:43:03.435079 [debug] [MainThread]: Flushing usage events

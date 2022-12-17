@@ -1,0 +1,13 @@
+spotify:
+  outputs:
+    dev:
+      type: postgres
+      threads: 1
+      host: "{{ env_var('DBT_HOST') }}"
+      port: 5432
+      user: "{{ env_var('DBT_USER') }}"
+      pass: "{{ env_var('DBT_PASSWORD') }}"
+      dbname: spotify
+      schema: analytics
+
+  target: dev
