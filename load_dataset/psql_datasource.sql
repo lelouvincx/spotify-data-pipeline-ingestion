@@ -96,8 +96,3 @@ CREATE TABLE spotify.my_tracks (
   tempo DOUBLE PRECISION,
   PRIMARY KEY (track_unique_id)
 );
-
-ALTER TABLE spotify.spotify_tracks
-ADD CONSTRAINT fk_spotify_tracks_albums
-FOREIGN KEY (album_id)
-REFERENCES spotify.spotify_albums(album_id);

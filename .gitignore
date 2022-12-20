@@ -17,3 +17,4 @@ Pipfile.lock
 dagster_home/logs/
 dagster_home/.logs_queue/
 dagster_home/.telemetry/
+key.pem

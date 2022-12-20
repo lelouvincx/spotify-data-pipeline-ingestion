@@ -38,8 +38,8 @@ lint test code base:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ssh -o StrictHostKeyChecking=no $SERVER "make install"
-    - ssh -o StrictHostKeyChecking=no $SERVER ". venv/bin/activate && make check && make lint"
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && make install"
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && . venv/bin/activate && make check && make lint"
     - echo "Lint complete."
 
 deploy to production:
@@ -52,11 +52,22 @@ deploy to production:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && git checkout main && git checkout -- env && git pull && make build" # Update new code and build
+    - touch ./env && cat $ENV > ./env # Load env from $ENV
+    - scp -o StrictHostKeyChecking=no ./env $SERVER:$DIR #Overwrite env file
     - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && make restart"
+    - echo "Data pipeline successfully deployed."
+
+smoke test production:
+  stage: test
+  script:
+    - echo "Running smoke test... This will take about 60 seconds."
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
     - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 3306" # health check MySQL
     - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 5432" # health check PostgreSQL
-    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 3001" # health check dagit
-    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && nc -zv localhost 3000" # health check metabase
-    - echo "Data pipeline successfully deployed."
-  only:
-    - main
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && curl http://localhost:3001/" # health check dagit
+    - ssh -o StrictHostKeyChecking=no $SERVER "cd $DIR && curl http://localhost:3000/" # health check metabase
+    - echo "Smoking complete."
