@@ -18,7 +18,7 @@ def validate_api2psql_ingestion(context, statuses):
 
 
 @daily_partitioned_config(
-    start_date=datetime(2022, 12, 11), timezone="Asia/Ho_Chi_Minh"
+    start_date=datetime(2022, 12, 19), timezone="Asia/Ho_Chi_Minh"
 )
 def get_partitioned_config(start: datetime, _end: datetime):
     # Read metadata

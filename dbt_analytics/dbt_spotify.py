@@ -26,10 +26,6 @@ def dbt_spotify_job():
     test_dbt_spotify(analytics)
 
 
-@asset_sensor(
-    asset_key=AssetKey("trigger_dbt_spotify"),
-    job=dbt_spotify_job,
-    default_status=DefaultSensorStatus.RUNNING,
-)
+@asset_sensor(asset_key=AssetKey("trigger_dbt_spotify"), job=dbt_spotify_job)
 def dbt_spotify_job_sensor(context, asset_event):
     yield RunRequest(run_key=context.cursor)
